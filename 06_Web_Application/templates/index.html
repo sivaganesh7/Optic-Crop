@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OptiCrop - Smart Agricultural Production Optimization System. Predict the most suitable crop based on soil nutrients and environmental conditions.">
+    <title>OptiCrop - Smart Agricultural Production Optimization</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Animated background glowing circles -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <div class="container">
+        <main class="main-card">
+            <!-- Header Section -->
+            <header class="card-header">
+                <div class="logo-area">
+                    <svg class="leaf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 1 9.3a7 7 0 0 1-9 8.7z"></path>
+                        <path d="M9 22v-4h4v4"></path>
+                    </svg>
+                    <span class="logo-text">OptiCrop</span>
+                </div>
+                <h1 class="project-title">Smart Agricultural Production Optimization</h1>
+                <p class="project-subtitle">Enter soil chemistry and environmental parameters below to discover the most suitable crop for your land using our advanced machine learning engine.</p>
+            </header>
+
+            <!-- Error Messages -->
+            {% if error %}
+            <div class="alert alert-danger" id="error-alert">
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span class="alert-text">{{ error }}</span>
+            </div>
+            {% endif %}
+
+            <!-- Input Form -->
+            <form action="{{ url_for('predict') }}" method="POST" id="prediction-form" class="prediction-form" novalidate>
+                <div class="form-grid">
+                    <!-- Nitrogen -->
+                    <div class="input-group">
+                        <label for="N">
+                            Nitrogen (N)
+                            <span class="tooltip" data-tooltip="Nitrogen is essential for leaf growth and green color.">i</span>
+                        </label>
+                        <input type="number" id="N" name="N" step="any" required placeholder="e.g. 90" 
+                               value="{{ form_data.N if form_data else '' }}" min="0" max="200">
+                        <span class="helper-text">Recommended range: 0 - 200 mg/kg</span>
+                        <span class="error-msg"></span>
+                    </div>
+
+                    <!-- Phosphorous -->
+                    <div class="input-group">
+                        <label for="P">
+                            Phosphorous (P)
+                            <span class="tooltip" data-tooltip="Phosphorous helps in root development and flowering.">i</span>
+                        </label>
+                        <input type="number" id="P" name="P" step="any" required placeholder="e.g. 42" 
+                               value="{{ form_data.P if form_data else '' }}" min="0" max="200">
+                        <span class="helper-text">Recommended range: 0 - 200 mg/kg</span>
+                        <span class="error-msg"></span>
+                    </div>
+
+                    <!-- Potassium -->
+                    <div class="input-group">
+                        <label for="K">
+                            Potassium (K)
+                            <span class="tooltip" data-tooltip="Potassium improves disease resistance and water retention.">i</span>
+                        </label>
+                        <input type="number" id="K" name="K" step="any" required placeholder="e.g. 43" 
+                               value="{{ form_data.K if form_data else '' }}" min="0" max="300">
+                        <span class="helper-text">Recommended range: 0 - 300 mg/kg</span>
+                        <span class="error-msg"></span>
+                    </div>
+
+                    <!-- Temperature -->
+                    <div class="input-group">
+                        <label for="temperature">
+                            Temperature (°C)
+                            <span class="tooltip" data-tooltip="Current average ambient temperature.">i</span>
+                        </label>
+                        <input type="number" id="temperature" name="temperature" step="any" required placeholder="e.g. 25.6" 
+                               value="{{ form_data.temperature if form_data else '' }}" min="-10" max="60">
+                        <span class="helper-text">Plausible range: -10°C to 60°C</span>
+                        <span class="error-msg"></span>
+                    </div>
+
+                    <!-- Humidity -->
+                    <div class="input-group">
+                        <label for="humidity">
+                            Humidity (%)
+                            <span class="tooltip" data-tooltip="Relative atmospheric humidity percentage.">i</span>
+                        </label>
+                        <input type="number" id="humidity" name="humidity" step="any" required placeholder="e.g. 80.2" 
+                               value="{{ form_data.humidity if form_data else '' }}" min="0" max="100">
+                        <span class="helper-text">Valid range: 0% to 100%</span>
+                        <span class="error-msg"></span>
+                    </div>
+
+                    <!-- pH -->
+                    <div class="input-group">
+                        <label for="ph">
+                            Soil pH
+                            <span class="tooltip" data-tooltip="Soil pH level (acidity or alkalinity). 7.0 is neutral.">i</span>
+                        </label>
+                        <input type="number" id="ph" name="ph" step="0.01" required placeholder="e.g. 6.5" 
+                               value="{{ form_data.ph if form_data else '' }}" min="0" max="14">
+                        <span class="helper-text">Valid range: 0.0 to 14.0</span>
+                        <span class="error-msg"></span>
+                    </div>
+
+                    <!-- Rainfall -->
+                    <div class="input-group">
+                        <label for="rainfall">
+                            Rainfall (mm)
+                            <span class="tooltip" data-tooltip="Average annual/seasonal rainfall in millimeters.">i</span>
+                        </label>
+                        <input type="number" id="rainfall" name="rainfall" step="any" required placeholder="e.g. 202.9" 
+                               value="{{ form_data.rainfall if form_data else '' }}" min="0" max="500">
+                        <span class="helper-text">Plausible range: 0 - 500 mm</span>
+                        <span class="error-msg"></span>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="reset" class="btn btn-secondary" id="reset-btn">Reset Form</button>
+                    <button type="submit" class="btn btn-primary" id="predict-btn">Predict Suitable Crop</button>
+                </div>
+            </form>
+
+            <!-- Footer -->
+            <footer class="card-footer">
+                <p>&copy; 2026 OptiCrop. Precision Agriculture powered by Machine Learning.</p>
+            </footer>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loading-overlay">
+            <div class="loader-content">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+                <h2>Analyzing Soil & Weather...</h2>
+                <p>Running agricultural recommendation algorithms</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

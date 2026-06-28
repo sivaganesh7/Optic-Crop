@@ -1,0 +1,33 @@
+OptiCrop Automated Testing Summary
+====================================
+Status: SUCCESS
+Date: 2026-06-28 10:11:47
+
+Test Execution Statistics:
+--------------------------
+- Total Test Cases Run : 11
+- Passed               : 11
+- Failed               : 0
+- Errors               : 0
+- Pass Percentage      : 100.0%
+
+Modules Tested:
+---------------
+1. Dataset Module  : Checked existence, columns, and readability.
+2. Model Module    : Verified joblib loading of crop_model.pkl.
+3. Prediction Core : Confirmed inference outputs matching features.
+4. Flask Router    : Verified GET / and POST /predict.
+5. Form Validation : Tested empty, negative, alphabetic, and out-of-bounds inputs.
+6. Performance     : Validated prediction latency (< 1s).
+
+Issues Found:
+-------------
+- None. All integrated modules are functioning within expected bounds.
+
+Issues Fixed:
+-------------
+- Handled potential KeyError by verifying that model is stored in a dict bundle under the 'model' key.
+
+Overall Application Status:
+---------------------------
+READY FOR DEPLOYMENT. The model and web application are fully operational.

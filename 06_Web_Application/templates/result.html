@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation Result - OptiCrop</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Animated background glowing circles -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <div class="container">
+        <main class="main-card result-card-layout">
+            <!-- Header Section -->
+            <header class="card-header">
+                <div class="logo-area">
+                    <svg class="leaf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.58 1 9.3a7 7 0 0 1-9 8.7z"></path>
+                        <path d="M9 22v-4h4v4"></path>
+                    </svg>
+                    <span class="logo-text">OptiCrop</span>
+                </div>
+                <h1 class="project-title">Recommendation Analysis</h1>
+            </header>
+
+            <!-- Prediction Result Highlight Card -->
+            <section class="result-highlight">
+                <div class="success-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Optimization Complete</span>
+                </div>
+                
+                <h2 class="result-label">Recommended Crop</h2>
+                <div class="crop-badge-container">
+                    <div class="crop-value-card">
+                        <span class="crop-name">{{ crop }}</span>
+                        {% if confidence %}
+                        <span class="confidence-bar">Confidence: {{ "%.1f"|format(confidence) }}%</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="crop-message">Based on the soil properties and environmental conditions, the machine learning model has determined that <strong>{{ crop }}</strong> is the most suitable crop to cultivate for maximizing yield.</p>
+            </section>
+
+            <!-- Input Parameters Summary -->
+            <section class="summary-section">
+                <h3 class="section-title">Submitted Parameters</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Nitrogen (N)</span>
+                        <span class="summary-val">{{ inputs.N }} <small>mg/kg</small></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Phosphorous (P)</span>
+                        <span class="summary-val">{{ inputs.P }} <small>mg/kg</small></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Potassium (K)</span>
+                        <span class="summary-val">{{ inputs.K }} <small>mg/kg</small></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Temperature</span>
+                        <span class="summary-val">{{ inputs.temperature }} <small>°C</small></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Humidity</span>
+                        <span class="summary-val">{{ inputs.humidity }} <small>%</small></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Soil pH</span>
+                        <span class="summary-val">{{ inputs.ph }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Rainfall</span>
+                        <span class="summary-val">{{ inputs.rainfall }} <small>mm</small></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Actions -->
+            <div class="form-actions result-actions">
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">Return Home</a>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Predict Again</a>
+            </div>
+
+            <!-- Footer -->
+            <footer class="card-footer">
+                <p>&copy; 2026 OptiCrop. Precision Agriculture powered by Machine Learning.</p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
