@@ -4,7 +4,6 @@
 The objective of this module is to prepare the **OptiCrop** (Smart Agricultural Production Optimization System) dataset for machine learning. This involves data cleaning, handling missing values, removing duplicates, detecting and treating outliers, feature engineering (seasonal crop information extraction), and dividing the dataset into training and testing sets.
 
 ---
-
 ## Preprocessing Workflow
 The workflow for the preprocessing pipeline is structured as follows:
 
