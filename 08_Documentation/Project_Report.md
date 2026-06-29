@@ -1,7 +1,6 @@
 # Project Report - OptiCrop: Smart Agricultural Production Optimization System
 
 ---
-
 ## 1. Introduction
 Agriculture is the backbone of many economies worldwide. However, traditional farming practices heavily rely on historical intuition and trial-and-error, which are increasingly unreliable due to climate change, fluctuating weather patterns, and soil degradation. 
 
