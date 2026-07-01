@@ -165,3 +165,133 @@ This repository is pre-configured for root-level deployment on **Render** using 
 * **Yield Prediction**: Estimate tonnage per hectare.
 * **Weather Forecast Integration**: Auto-detect weather parameters using external APIs.
 * **AI Chat Assistant**: Provide interactive agricultural advice using LLMs.
+
+---
+
+## 📊 Model Performance
+
+The Machine Learning model was evaluated using multiple performance metrics to ensure reliable crop recommendations.
+
+**Evaluation Metrics**
+
+* Accuracy Score
+* Precision
+* Recall
+* F1-Score
+* Confusion Matrix
+* Cross-Validation
+
+The final trained model was selected based on its overall prediction performance and generalization capability.
+
+---
+
+## 🔒 Input Validation
+
+The application ensures high-quality predictions through comprehensive input validation.
+
+* Numeric validation for all input fields.
+* Accepts only valid agricultural parameter ranges.
+* Prevents missing or invalid values.
+* Client-side validation using JavaScript.
+* Server-side validation using Flask.
+
+---
+
+## 🧪 Testing Strategy
+
+The project follows a structured testing approach.
+
+### Unit Testing
+
+* Prediction function testing
+* Model loading validation
+* Input validation testing
+
+### Integration Testing
+
+* Frontend and backend communication
+* API response verification
+
+### System Testing
+
+* End-to-end crop recommendation workflow
+* User interface validation
+
+---
+
+## 📚 Dataset Information
+
+The dataset used for model training contains agricultural and environmental parameters required for crop prediction.
+
+**Features**
+
+* Nitrogen (N)
+* Phosphorus (P)
+* Potassium (K)
+* Temperature
+* Humidity
+* pH
+* Rainfall
+
+**Target**
+
+* Crop Name
+
+The dataset was cleaned, preprocessed, and balanced before training the Machine Learning model.
+
+---
+
+## 🌱 Benefits
+
+OptiCrop provides value to multiple stakeholders.
+
+### Farmers
+
+* Better crop selection
+* Reduced financial risk
+* Improved productivity
+
+### Researchers
+
+* Agricultural data analysis
+* Model evaluation
+* Research support
+
+### Government & Policymakers
+
+* Data-driven agricultural planning
+* Sustainable farming initiatives
+* Resource optimization
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome.
+
+To contribute:
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Push the branch to your fork.
+5. Open a Pull Request.
+
+Please ensure that all new features are tested before submitting.
+
+---
+
+## 📄 License
+
+This project is intended for educational and research purposes.
+
+---
+
+## 🙏 Acknowledgements
+
+Special thanks to:
+
+* Agricultural research communities for publicly available datasets.
+* The open-source Python ecosystem.
+* Flask and Scikit-learn contributors.
+* All team members who contributed to the successful completion of this project.
