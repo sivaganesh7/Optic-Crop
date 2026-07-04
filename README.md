@@ -2,51 +2,86 @@
 
 **AI-Powered Smart Agricultural Production Optimization System**
 
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-3.x-000000?logo=flask&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.2+-F7931E?logo=scikitlearn&logoColor=white)
+![License](https://img.shields.io/badge/License-Educational-green)
+![Tests](https://img.shields.io/badge/Tests-15%2F15%20Passed-brightgreen)
+
 OptiCrop is an end-to-end Machine Learning-based web application that recommends the most suitable crop based on soil nutrients and environmental conditions. The system helps farmers, researchers, and policymakers make data-driven agricultural decisions to improve crop productivity and promote sustainable farming practices.
 
 ---
 
 ## 📖 Project Overview
 
-The system analyzes important agricultural parameters such as:
-* **Nitrogen (N)**
-* **Phosphorus (P)**
-* **Potassium (K)**
-* **Temperature**
-* **Humidity**
-* **pH**
-* **Rainfall**
+The system analyzes seven key agricultural parameters to predict the most suitable crop for cultivation:
 
-Using these parameters, the trained Machine Learning model predicts the most suitable crop for cultivation.
+| Parameter | Unit | Valid Range |
+| :--- | :--- | :--- |
+| **Nitrogen (N)** | mg/kg | 0 – 200 |
+| **Phosphorus (P)** | mg/kg | 0 – 200 |
+| **Potassium (K)** | mg/kg | 0 – 300 |
+| **Temperature** | °C | -10 – 60 |
+| **Humidity** | % | 0 – 100 |
+| **pH** | — | 0 – 14 |
+| **Rainfall** | mm | 0 – 500 |
+
+The trained ML model can recommend from **22 crop classes** including rice, maize, chickpea, cotton, coffee, mango, apple, grapes, and more.
 
 ---
 
 ## 🎯 Objectives
 
 * Recommend the best crop for given soil and weather conditions.
-* Improve agricultural productivity.
-* Reduce farming risks.
-* Promote sustainable agriculture.
+* Improve agricultural productivity through data-driven insights.
+* Reduce farming risks caused by inappropriate crop selection.
+* Promote sustainable agriculture and resource optimization.
 * Provide intelligent decision support using Machine Learning.
 
 ---
 
 ## 🚀 Features
 
-* 🌾 **Smart Crop Recommendation**: Powered by a serialized Scikit-Learn pipeline.
-* 📊 **Soil & Environmental Analysis**: Preprocessed using the IQR outlier removal method.
-* 🤖 **Machine Learning Prediction**: Near-instantaneous inference (latency of **1.27 ms**).
-* 🌐 **Flask Web Application**: Premium **Nature-Tech Glassmorphic** UI with glowing animations.
-* 🛡️ **Dual-Layer Validation**: Client-side (JS) and server-side (Flask) input checks.
-* 📑 **Comprehensive Testing**: Automated unit tests achieving **100% pass rate**.
+* 🌾 **Smart Crop Recommendation** — Powered by a serialized Scikit-Learn Logistic Regression pipeline.
+* 📊 **Soil & Environmental Analysis** — Preprocessed using the IQR outlier removal method.
+* 🤖 **Near-Instant Prediction** — Model inference latency of **1.27 ms**.
+* 🌐 **Flask Web Application** — Premium **Nature-Tech Glassmorphic** UI with animated glowing backgrounds.
+* 🛡️ **Dual-Layer Validation** — Client-side (JavaScript) and server-side (Flask) input validation.
+* 📑 **Comprehensive Testing** — 15 automated unit tests achieving **100% pass rate**.
+* 🔮 **Confidence Score** — Displays prediction probability when available.
+
+---
+
+## 🏗 System Architecture
+
+```mermaid
+graph TD
+    subgraph Data Layer
+        A["Raw Dataset: Crop_recommendation.csv"] --> B["Preprocessing: preprocessing.py"]
+        B --> C["Cleaned Dataset & Train/Test Splits"]
+    end
+
+    subgraph Model Layer
+        C --> D["Model Training: model.py"]
+        D --> E["Serialized Model: crop_model.pkl"]
+    end
+
+    subgraph Application Layer
+        E --> F["Flask Backend: app.py"]
+        G["User Browser: HTML/CSS/JS"] <-->|"HTTP GET & POST"| F
+    end
+```
 
 ---
 
 ## 🛠 Technology Stack
 
-* **Backend**: Python 3.x, Flask, Joblib, Pandas, NumPy, Scikit-learn
-* **Frontend**: HTML5, CSS3 (Vanilla glassmorphism), JavaScript (real-time validation & loading)
-* **Deployment**: Gunicorn, Render, PythonAnywhere
+| Layer | Technologies |
+| :--- | :--- |
+| **Backend** | Python 3.11, Flask ≥3.0, Joblib, Pandas, NumPy, Scikit-Learn |
+| **Frontend** | HTML5, CSS3 (Glassmorphism), JavaScript (Real-time validation & loading) |
+| **ML Models** | Logistic Regression (deployed), K-Means Clustering (exploration) |
+| **Deployment** | Gunicorn, Render |
 
 ---
 
@@ -55,56 +90,48 @@ Using these parameters, the trained Machine Learning model predicts the most sui
 ```text
 OptiCrop/
 │
-├── 01_Problem_Definition/        # Project definition, survey, and impact analysis
-├── 02_Entity_Relationship_Diagram/ # Database architecture and ER diagrams
-├── 03_Data_Analysis/             # Exploratory Data Analysis & Raw Dataset
-├── 04_Preprocessing/             # Missing values, IQR outlier treatment, and splitting
-├── 05_Model_Building/            # Model training, K-Means, and serialization
-├── 06_Web_Application/           # Flask app backend, HTML templates, CSS/JS static files
-├── 07_Testing/                   # Automated unit tests, manual testing guides, and reports
-├── 08_Documentation/             # User manual, API, report, and deployment guides
-├── 09_Workflows/                 # Visual project workflow and sequence diagrams
+├── 01_Brainstorming_&_Ideation/    # Problem statements, empathy maps, literature survey
+├── 02_Requirement_Analysis/        # Solution requirements, technology stack, customer journey
+├── 03_Project_Design_Phase/        # System & solution architecture, ER diagrams, UI design
+├── 04_Project_Planning_Phase/      # Project planning, demo planning, scalability roadmap
+├── 05_Project_Development_Phase/   # Core development code
+│   ├── Data_Analysis/              #   ├── EDA scripts, plots, and analysis outputs
+│   ├── Preprocessing/              #   ├── Outlier removal, cleaning, train/test splitting
+│   └── Model_Building/             #   └── Model training, evaluation, serialization
+├── 06_Web_Application/             # Flask app, HTML templates, CSS/JS, model artifact
+│   ├── app.py                      #   ├── Flask backend with validation & prediction
+│   ├── model/crop_model.pkl        #   ├── Serialized ML model bundle
+│   ├── templates/                  #   ├── index.html, result.html
+│   ├── static/                     #   └── css/, js/, images/
+│   └── screenshots/                #   └── UI screenshots (home_page, result_page)
+├── 07_Project_Testing/             # Automated tests, manual testing, test reports
+├── 08_Project_Documentation/       # User manual, API docs, deployment guide, final report
+├── 09_Project_Demonstration/       # Demo planning, feature demonstrations, team involvement
+├── Dataset/                        # Raw dataset (Crop_recommendation.csv — 2,200 records)
 │
-├── README.md                     # This root documentation file
-├── requirements.txt              # Root dependencies including Gunicorn for production
-├── .gitignore                    # Python and IDE git ignore rules
-├── runtime.txt                   # Python version for Render deployment
-└── Procfile                      # Process file for Render web service deployment
+├── README.md                       # This documentation file
+├── requirements.txt                # Python dependencies (Flask, Scikit-Learn, Gunicorn, etc.)
+├── runtime.txt                     # Python version for Render deployment (python-3.11.9)
+├── Procfile                        # Process file for Render web service deployment
+└── .gitignore                      # Python, IDE, and OS ignore rules
 ```
 
 ---
 
 ## 🔄 Project Workflow
 
-```text
-Problem Definition
-        │
-        ▼
-Requirement Analysis
-        │
-        ▼
-Database Design (ERD)
-        │
-        ▼
-Dataset Collection
-        │
-        ▼
-Exploratory Data Analysis (EDA)
-        │
-        ▼
-Data Preprocessing (Outlier Removal)
-        │
-        ▼
-Model Building & Serialization
-        │
-        ▼
-Flask Web Application
-        │
-        ▼
-Testing (Automated & Manual)
-        │
-        ▼
-Documentation & Deployment
+```mermaid
+graph LR
+    A["Brainstorming & Ideation"] --> B["Requirement Analysis"]
+    B --> C["Design Phase"]
+    C --> D["Project Planning"]
+    D --> E["Dataset Collection"]
+    E --> F["Data Analysis (EDA)"]
+    F --> G["Preprocessing (IQR Outlier Removal)"]
+    G --> H["Model Building & Serialization"]
+    H --> I["Web Application Development"]
+    I --> J["Testing (Automated & Manual)"]
+    J --> K["Documentation & Deployment"]
 ```
 
 ---
@@ -121,163 +148,178 @@ Documentation & Deployment
 
 ---
 
-## ⚙️ Installation & Execution
+## ⚙️ Installation & Setup
+
+### Prerequisites
+
+* Python 3.11+ installed
+* `pip` package manager
+* Git
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/sivaganesh7/Optic-Crop.git
 cd Optic-Crop
 ```
 
-### 2. Set up and activate a virtual environment
+### 2. Create and activate a virtual environment
+
 ```bash
 python -m venv .venv
-.venv\Scripts\activate  # On Windows
-source .venv/bin/activate  # On macOS/Linux
+
+# Windows
+.venv\Scripts\activate
+
+# macOS / Linux
+source .venv/bin/activate
 ```
 
 ### 3. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 4. Run the Flask application
+
 ```bash
 cd 06_Web_Application
 python app.py
 ```
+
 Open your browser and navigate to: **[http://127.0.0.1:5000](http://127.0.0.1:5000)**
 
 ---
 
-## 🚀 Deployment
+## 🚀 Deployment (Render)
 
-This repository is pre-configured for root-level deployment on **Render** using the provided [Procfile](file:///d:/Projects/Optic-Crop/Procfile) and [runtime.txt](file:///d:/Projects/Optic-Crop/runtime.txt). 
-* The **Build Command** on Render should be: `pip install -r requirements.txt`
-* The **Start Command** is handled automatically by the `Procfile` (`web: gunicorn --chdir 06_Web_Application app:app`).
+This repository is pre-configured for deployment on **[Render](https://render.com)** using the provided `Procfile` and `runtime.txt`.
 
----
-
-## 📈 Future Enhancements
-
-* **Fertilizer Recommendation**: Suggest appropriate fertilizers based on the N-P-K ratios entered.
-* **Crop Disease Detection**: Add leaf image uploads to diagnose plant diseases.
-* **Yield Prediction**: Estimate tonnage per hectare.
-* **Weather Forecast Integration**: Auto-detect weather parameters using external APIs.
-* **AI Chat Assistant**: Provide interactive agricultural advice using LLMs.
+| Setting | Value |
+| :--- | :--- |
+| **Build Command** | `pip install -r requirements.txt` |
+| **Start Command** | Handled by `Procfile`: `web: gunicorn --chdir 06_Web_Application app:app` |
+| **Python Version** | `python-3.11.9` (from `runtime.txt`) |
 
 ---
 
 ## 📊 Model Performance
 
-The Machine Learning model was evaluated using multiple performance metrics to ensure reliable crop recommendations.
+The Machine Learning pipeline was evaluated through multiple metrics:
 
-**Evaluation Metrics**
+| Metric | Details |
+| :--- | :--- |
+| **Algorithm** | Logistic Regression (deployed) + K-Means Clustering (exploration) |
+| **Dataset** | 2,200 records, 22 crop classes (100 samples each — perfectly balanced) |
+| **Preprocessing** | IQR outlier removal → 1,768 cleaned records |
+| **Train/Test Split** | 80% / 20% (stratified) — 1,414 train / 354 test |
+| **Model Load Time** | ~45 ms |
+| **Prediction Latency** | **1.27 ms** |
+| **Serialization** | Joblib (`crop_model.pkl`) — model bundled in a dictionary with metadata |
 
-* Accuracy Score
-* Precision
-* Recall
-* F1-Score
-* Confusion Matrix
-* Cross-Validation
-
-The final trained model was selected based on its overall prediction performance and generalization capability.
+**Evaluation Metrics Used**: Accuracy, Precision, Recall, F1-Score, Confusion Matrix, Cross-Validation.
 
 ---
 
 ## 🔒 Input Validation
 
-The application ensures high-quality predictions through comprehensive input validation.
+The application ensures data quality through **dual-layer validation**:
 
-* Numeric validation for all input fields.
-* Accepts only valid agricultural parameter ranges.
-* Prevents missing or invalid values.
-* Client-side validation using JavaScript.
-* Server-side validation using Flask.
+### Client-Side (JavaScript)
+* Real-time field validation on input
+* Blocks invalid (non-numeric) keystrokes
+* Highlights errors with visual red indicators
+* Custom loading animation during form submission
+
+### Server-Side (Flask)
+* Validates all 7 required fields are present and non-empty
+* Enforces agricultural plausibility ranges (see [parameter table](#-project-overview))
+* Returns user-friendly error messages without exposing stack traces
 
 ---
 
-## 🧪 Testing Strategy
+## 🧪 Testing
 
-The project follows a structured testing approach.
+The project follows a structured testing approach with **15 automated tests — 100% pass rate**.
 
-### Unit Testing
+| Test Category | Coverage |
+| :--- | :--- |
+| **Dataset Integrity** | Verifies `Crop_recommendation.csv` has 2,200 rows and all 8 required columns |
+| **Model Loading** | Validates `crop_model.pkl` loads correctly with the expected pipeline structure |
+| **Prediction Core** | Tests prediction output for known input parameters (e.g., Rice) |
+| **Routing & Responses** | Validates `GET /` and `POST /predict` return correct HTTP status codes |
+| **Form Validation** | Tests empty submissions, non-numeric input, and out-of-range values |
+| **Performance** | Asserts model load time ≤ 45 ms and inference latency ≤ 2 ms |
 
-* Prediction function testing
-* Model loading validation
-* Input validation testing
+Run tests:
 
-### Integration Testing
-
-* Frontend and backend communication
-* API response verification
-
-### System Testing
-
-* End-to-end crop recommendation workflow
-* User interface validation
+```bash
+cd 07_Project_Testing
+python testing.py
+```
 
 ---
 
 ## 📚 Dataset Information
 
-The dataset used for model training contains agricultural and environmental parameters required for crop prediction.
+**Source**: `Dataset/Crop_recommendation.csv`
 
-**Features**
+* **Records**: 2,200 (100 per crop class — perfectly balanced)
+* **Features**: 7 input columns (N, P, K, Temperature, Humidity, pH, Rainfall)
+* **Target**: `label` — 22 unique crop classes
+* **Crops**: rice, maize, chickpea, kidneybeans, pigeonpeas, mothbeans, mungbean, blackgram, lentil, pomegranate, banana, mango, grapes, watermelon, muskmelon, apple, orange, papaya, coconut, cotton, jute, coffee
 
-* Nitrogen (N)
-* Phosphorus (P)
-* Potassium (K)
-* Temperature
-* Humidity
-* pH
-* Rainfall
+**Preprocessing Pipeline**:
+1. Missing values verified (0 missing) with median imputation fallback
+2. Duplicate check (0 duplicates found)
+3. IQR outlier removal — 432 rows removed → 1,768 cleaned records
+4. Feature engineering — `Season` column derived from temperature
+5. Stratified 80/20 train-test split
 
-**Target**
+---
 
-* Crop Name
+## 📈 Future Enhancements
 
-The dataset was cleaned, preprocessed, and balanced before training the Machine Learning model.
+* 🌿 **Fertilizer Recommendation** — Suggest appropriate fertilizers based on N-P-K ratios.
+* 🍃 **Crop Disease Detection** — Add leaf image uploads to diagnose plant diseases.
+* 📊 **Yield Prediction** — Estimate tonnage per hectare using regression models.
+* 🌦️ **Weather API Integration** — Auto-detect temperature, humidity, and rainfall using OpenWeatherMap.
+* 🤖 **AI Chat Assistant** — Interactive agricultural advice powered by LLMs.
+* 📈 **Soil Health Dashboard** — Historical query tracking for nutrient trend analysis.
 
 ---
 
 ## 🌱 Benefits
 
-OptiCrop provides value to multiple stakeholders.
+### 👨‍🌾 Farmers
+* Data-driven crop selection for their specific soil conditions
+* Reduced financial risk from crop failure
+* Improved productivity and resource utilization
 
-### Farmers
+### 🔬 Researchers
+* Agricultural data analysis and model evaluation
+* Reproducible ML pipeline for experimentation
+* Open-source foundation for further research
 
-* Better crop selection
-* Reduced financial risk
-* Improved productivity
-
-### Researchers
-
-* Agricultural data analysis
-* Model evaluation
-* Research support
-
-### Government & Policymakers
-
-* Data-driven agricultural planning
-* Sustainable farming initiatives
-* Resource optimization
+### 🏛️ Government & Policymakers
+* Data-driven agricultural planning and policy support
+* Sustainable farming initiative planning
+* Resource optimization across regions
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome.
+Contributions are welcome! To contribute:
 
-To contribute:
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/your-feature`)
+3. **Commit** your changes (`git commit -m "Add your feature"`)
+4. **Push** to your fork (`git push origin feature/your-feature`)
+5. **Open** a Pull Request
 
-1. Fork the repository.
-2. Create a feature branch.
-3. Commit your changes.
-4. Push the branch to your fork.
-5. Open a Pull Request.
-
-Please ensure that all new features are tested before submitting.
+Please ensure all new features are tested before submitting.
 
 ---
 
@@ -289,9 +331,6 @@ This project is intended for educational and research purposes.
 
 ## 🙏 Acknowledgements
 
-Special thanks to:
-
 * Agricultural research communities for publicly available datasets.
-* The open-source Python ecosystem.
-* Flask and Scikit-learn contributors.
+* The open-source Python ecosystem — [Scikit-Learn](https://scikit-learn.org/), [Flask](https://flask.palletsprojects.com/), [Pandas](https://pandas.pydata.org/).
 * All team members who contributed to the successful completion of this project.
