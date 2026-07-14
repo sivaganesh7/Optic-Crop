@@ -143,8 +143,6 @@ graph LR
 | **Pepakayala V Siva Ganesh Naga Sai Kumar** | Team Lead / Machine Learning / Backend |
 | Durga Srujana Chintakula | Data Collection & Preprocessing |
 | Shaik Zunera | Data Analysis & Visualization |
-| Bathula Sushma Reddy | Frontend Development |
-| Paluri Joseph Roland | Testing & Documentation |
 
 ---
 
